@@ -1,0 +1,9 @@
+{
+	"name": "tentools",
+	"url" : "https://github.com/TentaRJ",
+	"license": "MIT",
+	"description": "ten",
+	"version": "0.0.1",
+	"releasenote": "Trying things",
+	"contributors": ["wow","wee"]
+}
