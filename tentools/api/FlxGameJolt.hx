@@ -1,4 +1,4 @@
-package tentools;
+package tentools.api;
 
 import flash.display.Loader;
 import flash.display.BitmapData;

@@ -2,8 +2,8 @@
 	"name": "tentools",
 	"url" : "https://github.com/TentaRJ",
 	"license": "MIT",
-	"description": "ten",
-	"version": "0.0.1",
-	"releasenote": "Trying things",
+	"description": "API designed for the integration of my GameJolt FNF API",
+	"version": "0.0.2",
+	"releasenote": "reorganized files for later use",
 	"contributors": ["wow","wee"]
 }
