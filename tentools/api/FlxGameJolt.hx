@@ -1,3 +1,8 @@
+/**
+Originally forked from Flixel-Addons FLxGameJolt.hx, tysm :3
+-tenta
+**/
+
 package tentools.api;
 
 import flash.display.Loader;
@@ -65,7 +70,7 @@ class FlxGameJolt
 	 * Useful if you're not getting the right data back.
 	 * Only works in debug mode.
 	 */
-	public static var verbose:Bool = false;
+	public static var verbose:Bool = true;
 
 	/**
 	 * Whether or not the API has been fully initialized by passing game id, private key, and authenticating user name and token.
@@ -682,6 +687,9 @@ class FlxGameJolt
 	 */
 	static function sendLoaderRequest(URLString:String, ?Callback:Dynamic):Void
 	{
+		#if debug
+		trace(URLString);
+		#end
 		var request:URLRequest = new URLRequest(URLString + "&signature=" + encryptURL(URLString));
 		request.method = URLRequestMethod.POST;
 
@@ -742,6 +750,7 @@ class FlxGameJolt
 		{
 			FlxG.log.add("FlxGameJolt: GameJolt returned the following message: " + returnMap.get("message"));
 		}
+		trace(returnMap);
 		#end
 
 		if (_getImage)
