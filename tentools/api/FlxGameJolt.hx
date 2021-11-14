@@ -168,6 +168,11 @@ class FlxGameJolt
 	 * URLLoader object for sending URL requests.
 	 */
 	static var _loader:URLLoader;
+	
+	/**
+	 * A string map that contains what is returned from GameJolt servers.
+	 */	
+	static var returnMap:Map<String, String> = new Map<String, String>();
 
 	/**
 	 * Various common strings required by the API's HTTP values.
@@ -726,8 +731,7 @@ class FlxGameJolt
 			#end
 			return;
 		}
-
-		var returnMap:Map<String, String> = new Map<String, String>();
+		
 		var stringArray:Array<String> = Std.string((cast e.currentTarget).data).split("\r");
 
 		// this regex will remove line breaks and quotes down below
