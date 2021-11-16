@@ -176,8 +176,10 @@ class FlxGameJolt
 
 	/**
 	 * Various common strings required by the API's HTTP values.
+	 * 
+	 * Version 1 of the API
 	 */
-	static inline var URL_API:String = "http://gamejolt.com/api/game/v1/";
+	static inline var URL_API:String = "https://gamejolt.com/api/game/v1/";
 
 	static inline var RETURN_TYPE:String = "?format=keypair";
 	static inline var URL_GAME_ID:String = "&game_id=";
@@ -437,12 +439,12 @@ class FlxGameJolt
 	 * @param	Limit		The maximum number of scores to retrieve. Leave null to retrieve only this user's scores.
 	 * @param	CallBack	An optional callback function. Will return a Map<String:String> whose keys and values are equivalent to the key-value pairs returned by GameJolt.
 	 */
-	public static function fetchScore(?Limit:Int, ?Callback:Dynamic):Void
+	public static function fetchScore(tableID:Int, ?Limit:Int, ?Callback:Dynamic):Void
 	{
 		if (!gameInit)
 			return;
 
-		var tempURL = URL_API + "scores/" + RETURN_TYPE + URL_GAME_ID + _gameID;
+		var tempURL = URL_API + "scores/" + RETURN_TYPE + URL_GAME_ID + _gameID + "&table_id" + tableID;
 
 		if (!_initialized)
 		{
@@ -481,8 +483,7 @@ class FlxGameJolt
 	 * @param	ExtraData	Optional extra data associated with the score, which will NOT be visible on the site but can be retrieved by the API. Ignored if "".
 	 * @param 	Callback 	An optional callback function. Will return a Map<String:String> whose keys and values are equivalent to the key-value pairs returned by GameJolt.
 	 */
-	public static function addScore(Score:String, Sort:Float, ?TableID:Int, AllowGuest:Bool = false, ?GuestName:String, ?ExtraData:String,
-			?Callback:Dynamic):Void
+	public static function addScore(Score:String, Sort:Float, ?TableID:Int, AllowGuest:Bool = false, ?GuestName:String, ?ExtraData:String, ?Callback:Dynamic):Void
 	{
 		if (!gameInit)
 			return;
@@ -692,9 +693,7 @@ class FlxGameJolt
 	 */
 	static function sendLoaderRequest(URLString:String, ?Callback:Dynamic):Void
 	{
-		#if debug
 		trace(URLString);
-		#end
 		var request:URLRequest = new URLRequest(URLString + "&signature=" + encryptURL(URLString));
 		request.method = URLRequestMethod.POST;
 
@@ -703,10 +702,7 @@ class FlxGameJolt
 		if (_loader == null)
 			_loader = new URLLoader();
 
-		#if debug
-		if (verbose)
-			FlxG.log.add("FlxGameJolt: Contacting " + request.url);
-		#end
+		// trace(request.url);
 
 		_loader.addEventListener(Event.COMPLETE, parseData);
 		_loader.load(request);
@@ -731,8 +727,10 @@ class FlxGameJolt
 			#end
 			return;
 		}
-		
+
 		var stringArray:Array<String> = Std.string((cast e.currentTarget).data).split("\r");
+
+		trace(stringArray);
 
 		// this regex will remove line breaks and quotes down below
 		var r:EReg = ~/[\r\n\t"]+/g;
