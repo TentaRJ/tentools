@@ -198,32 +198,39 @@ class FlxGameJolt
 	 * @param 	UserToken	The user token to authenticate, if AutoAuth is true. If you set AutoAuth to true but don't put a value here, FlxGameJolt will attempt to get the user data automatically, which will only work for Flash embedded on GameJolt, or desktop games run via Quick Play.
 	 * @param 	Callback 	An optional callback function, which is only used if AutoAuth is set to true. Will return true if authentication was successful, false otherwise.
 	 */
-	public static function init(GameID:Int, PrivateKey:String, AutoAuth:Bool = false, ?UserName:String, ?UserToken:String, ?Callback:Dynamic):Void
+	public static function init(GameID:Int, PrivateKey:String, ?Callback:Dynamic):Void
 	{
 		if (_gameID != 0 && _privateKey != "")
-			return;
+			{
+				Callback(false);
+				return;
+			}
 
 		_gameID = GameID;
 		_privateKey = PrivateKey;
 
+		Callback(true);
+
 		// If we want to automatically authenticate the user, must have both username and usertoken passed
 		// OR it must be embedded flash or quickplay.
 
-		if (AutoAuth)
-		{
-			if (UserName != null && UserToken != null)
-			{
-				authUser(UserName, UserToken, Callback);
-			}
-			else if ((UserName == null || UserToken == null) && (isEmbeddedFlash || isQuickPlay))
-			{
-				authUser(null, null, Callback);
-			}
-			else
-			{
-				Callback(false);
-			}
-		}
+		// I kinda don't wanna do the auto auth thing so xD
+
+		// if (AutoAuth)
+		// {
+		// 	if (UserName != null && UserToken != null)
+		// 	{
+		// 		authUser(UserName, UserToken, Callback);
+		// 	}
+		// 	else if ((UserName == null || UserToken == null) && (isEmbeddedFlash || isQuickPlay))
+		// 	{
+		// 		authUser(null, null, Callback);
+		// 	}
+		// 	else
+		// 	{
+		// 		Callback(false);
+		// 	}
+		// }
 	}
 
 	/**
@@ -702,7 +709,7 @@ class FlxGameJolt
 		if (_loader == null)
 			_loader = new URLLoader();
 
-		// trace(request.url);
+		trace(request.url);
 
 		_loader.addEventListener(Event.COMPLETE, parseData);
 		_loader.load(request);
