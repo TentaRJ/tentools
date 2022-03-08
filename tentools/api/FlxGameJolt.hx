@@ -82,14 +82,14 @@ class FlxGameJolt
 	 *
 	 * @return	True if game ID is set, false otherwise.
 	 */
-	static var gameInit(get, never):Bool;
+	public static var gameInit(get, never):Bool;
 
 	/**
 	 * Internal method to verify that this user (and game) have been authenticated. Called before running functions which require authentication.
 	 *
 	 * @return 	True if authenticated, false otherwise.
 	 */
-	static var authenticated(get, never):Bool;
+	public static var authenticated(get, never):Bool;
 
 	/**
 	 * The user's GameJolt user name. Only works if you've called authUser() and/or init(), otherwise will return "No user".
@@ -119,12 +119,12 @@ class FlxGameJolt
 	/**
 	 * Internal storage for a callback function, used when the URLLoader is complete.
 	 */
-	static var _callBack:Dynamic;
+	public static var _callBack:Dynamic;
 
 	/**
 	 * Internal storage for this game's ID.
 	 */
-	static var _gameID:Int = 0;
+	public static var _gameID:Int = 0;
 
 	/**
 	 * Internal storage for this game's private key.
@@ -132,59 +132,59 @@ class FlxGameJolt
 	 * This can be found at http://gamejolt.com/dashboard/developer/games/achievements/GAME_ID/ where GAME_ID is your unique game ID number.
 	 * Each game has a unique private key; you cannot use one key for all of your games.
 	 */
-	static var _privateKey:String = "";
+	public static var _privateKey:String = "";
 
 	/**
 	 * Internal storage for this user's username. Can be retrieved automatically if Flash or QuickPlay.
 	 */
-	static var _userName:String;
+	public static var _userName:String;
 
 	/**
 	 * Internal storage for this user's token. Can be retrieved automatically if Flash or QuickPlay.
 	 */
-	static var _userToken:String;
+	public static var _userToken:String;
 
 	/**
 	 * Internal storage for the most common URL elements: the gameID, user name, and user token.
 	 */
-	static var _idURL:String;
+	public static var _idURL:String;
 
 	/**
 	 * Set to true once game ID, user name, user token have been set and user name and token have been verified.
 	 */
-	static var _initialized:Bool = false;
+	public static var _initialized:Bool = false;
 
 	/**
 	 * Internal tracker for authenticating user data.
 	 */
-	static var _verifyAuth:Bool = false;
+	public static var _verifyAuth:Bool = false;
 
 	/**
 	 * Internal tracker for getting bitmapdata for a trophy image.
 	 */
-	static var _getImage:Bool = false;
+	public static var _getImage:Bool = false;
 
 	/**
 	 * URLLoader object for sending URL requests.
 	 */
-	static var _loader:URLLoader;
+	public static var _loader:URLLoader;
 	
 	/**
 	 * A string map that contains what is returned from GameJolt servers.
 	 */	
-	static var returnMap:Map<String, String> = new Map<String, String>();
+	public static var returnMap:Map<String, String> = new Map<String, String>();
 
 	/**
 	 * Various common strings required by the API's HTTP values.
 	 * 
 	 * Version 1 of the API
 	 */
-	static inline var URL_API:String = "https://gamejolt.com/api/game/v1/";
+	public static inline var URL_API:String = "https://gamejolt.com/api/game/v1/";
 
-	static inline var RETURN_TYPE:String = "?format=keypair";
-	static inline var URL_GAME_ID:String = "&game_id=";
-	static inline var URL_USER_NAME:String = "&username=";
-	static inline var URL_USER_TOKEN:String = "&user_token=";
+	public static inline var RETURN_TYPE:String = "?format=keypair";
+	public static inline var URL_GAME_ID:String = "&game_id=";
+	public static inline var URL_USER_NAME:String = "&username=";
+	public static inline var URL_USER_TOKEN:String = "&user_token=";
 
 	/**
 	 * Initialize this class by storing the GameID and private key.
