@@ -291,7 +291,7 @@ class FlxGameJolt
 
 		if (UserName == null || UserToken == null)
 		{
-			#if desktop
+			#if sys
 			for (arg in Sys.args())
 			{
 				var argArray = arg.split("=");
@@ -966,7 +966,7 @@ class FlxGameJolt
 
 	static function get_isQuickPlay():Bool
 	{
-		#if !desktop
+		#if !sys
 		return false;
 		#else
 		var argmap:Map<String, String> = new Map<String, String>();
